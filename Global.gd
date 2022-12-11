@@ -9,6 +9,15 @@ var fever = 0
 var fever_multiplier = 0.15
 var starting_in = 0
 
+var color_rotate = 0
+var color_rotate_amount = 10
+var color_rotate_index = 0.01
+var color_position = Vector2.ZERO
+
+var sway_index = 0
+var sway_period = 0.1
+
+
 var fever_decay = 0.1
 var feverish = false
 
@@ -24,6 +33,13 @@ func _ready():
 	reset()
 
 func _physics_process(_delta):
+	if color_rotate >= 0:
+		color_rotate -= color_rotate_index
+		color_rotate_index *= 1.05
+	else:
+		color_rotate_index = 0.1
+	sway_index += sway_period
+	
 	if fever >= 100 and not feverish:
 		fever = 100
 	elif fever > 0:

@@ -56,4 +56,7 @@ func change_speed(s):
 	speed_multiplier = s
 
 func die():
+	var Die_sound = get_node_or_null('/root/Game/Die')
+	if Die_sound != null:
+		Die_sound.play()
 	queue_free()

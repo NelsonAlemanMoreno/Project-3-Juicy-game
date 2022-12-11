@@ -9,4 +9,7 @@ func _physics_process(_delta):
 	pass
 
 func hit(_ball):
-	pass
+	var Wall_sound = get_node_or_null('/root/Game/Wall')
+	if Wall_sound != null:
+		Wall_sound.play()
+

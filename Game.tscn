@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Brick/Brick_Container.gd" type="Script" id=1]
 [ext_resource path="res://Paddle/Paddle.tscn" type="PackedScene" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/Instructions.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/Fever.gd" type="Script" id=9]
+[ext_resource path="res://Assets/die.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/wall.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/paddle.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/GameMusic3.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Assets/brick.wav" type="AudioStream" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 500 )
@@ -20,6 +25,7 @@ extents = Vector2( 612, 100 )
 script = ExtResource( 4 )
 
 [node name="Wall_Container" type="Node2D" parent="."]
+visible = false
 
 [node name="Wall_Left" type="StaticBody2D" parent="Wall_Container"]
 script = ExtResource( 6 )
@@ -90,5 +96,22 @@ visible = false
 
 [node name="Instructions" parent="UI" instance=ExtResource( 8 )]
 pause_mode = 2
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
+
+[node name="Wall" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( -3, 0 )
+stream = ExtResource( 11 )
+
+[node name="Brick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+
+[node name="Paddle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
 
 [connection signal="timeout" from="Fever/Timer" to="Fever" method="_on_Timer_timeout"]
