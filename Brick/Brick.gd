@@ -75,10 +75,16 @@ func hit(_ball):
 func die():
 	dying = true
 	collision_layer = 0
-	$ColorRect.hide()
 	Global.update_score(score)
 	if not Global.feverish:
 		Global.update_fever(score)
+	$Tween.interpolate_property(self, "position", position, Vector2(position.x, 1000), time_fall, Tween.TRANS_EXPO, Tween.EASE_IN)
+	$Tween.interpolate_property(self, "rotation", rotation, -PI + randf()*2*PI, time_rotate, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($ColorRect, "color:a", $ColorRect.color.a, 0, time_a, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($ColorRect, "color:s", $ColorRect.color.s, 0, time_s, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($ColorRect, "color:v", $ColorRect.color.v, 0, time_v, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
 	get_parent().check_level()
 	if randf() < powerup_prob:
 		var Powerup_Container = get_node_or_null("/root/Game/Powerup_Container")

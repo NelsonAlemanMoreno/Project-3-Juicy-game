@@ -9,6 +9,9 @@ func _ready():
 func _physics_process(_delta):
 	if get_child_count() == 0:
 		Global.update_lives(-1)
+		var camera = get_node_or_null("/root/Game/Camera")
+		if camera != null:
+			camera.add_trauma(3.0)
 		Global.update_fever(-Global.fever)
 		make_ball()
 
